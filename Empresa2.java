@@ -34,46 +34,69 @@ public class Empresa2 {
         System.out.println("Nome do funcionario com maior salario: " + maiorFuncionario.nome);
         System.out.println("Maior salario: " + maiorFuncionario.salario);
 
-        boolean encontrou = false;
-        //Digite o nome do funcionarios que deseja buscar
-        System.out.println("Digite o nome do funcionarios que deseja buscar:");
-        String nomeBusca = scanner.nextLine();
-        for (int i = 0; i < funcionarios.length; i++) {
-            if (funcionarios[i].nome.equals(nomeBusca)) {
-                encontrou = true;
-            }
-        }
-        if (encontrou) {
-            System.out.println("Funcionario encontrado: " + nomeBusca);
-        } else {
-            System.out.println("Funcionario não encontrado: " + nomeBusca);
-        }
 
-        //Atualizar o salario do funcionarios
-        System.out.println("Digite o nome do funcionarios que deseja atualizar o salario: ");
+        System.out.println("CHEGUEI NO WHILE");
+        int numero = 1;
+        while(numero != 0) {
+
+        // ===== Menu =====
+        System.out.println("===== Menu =====");
+        System.out.println("1 - Mostrar os funcionarios: ");
+        System.out.println("2 - Buscar funcionario: ");
+        System.out.println("3 - Atualizar salario: ");
+        System.out.println("4 - Remover funcionario: ");
+        System.out.println("0 - Sair: ");
+
+        numero = scanner.nextInt();
+        scanner.nextLine(); 
+        switch(numero) {
+
+        case 1:
+            for(int i = 0; i <funcionarios.length; i++) {
+                if(funcionarios[i] != null) {
+                   funcionarios[i].exibirDados();
+                }
+        }
+        break;
+
+        case 2: 
+           System.out.println("Digite o nome do funcionario:");
+           String nomeBusca = scanner.nextLine();
+           for(int i = 0; i <funcionarios.length; i++) {
+            if(funcionarios[i] != null && funcionarios[i].nome.equals(nomeBusca)) {
+               funcionarios[i].exibirDados();
+            }
+           }
+        break;
+
+        case 3: 
+        System.out.println("Digite o nome do funcionario:");
         String nomeAtualizar = scanner.nextLine();
-        for(int i = 0; i < funcionarios.length; i++) {
-            if(funcionarios[i].nome.equals(nomeAtualizar)) {
-                System.out.println("Digite o novo salario: ");
-                String novoSalario = scanner.nextLine();
-                funcionarios[i].salario = Double.parseDouble(novoSalario);
-                funcionarios[i].exibirDados();
-            }
-        }
-        //Remover o funcionarios 
-        System.out.println("Digite o nome do funcionarios que deseja remover: ");
-        String nomeRemover = scanner.nextLine();
-        for(int i = 0; i < funcionarios.length; i++) {
-            if(funcionarios[i] == null) {
-                continue;
-            }
-            funcionarios[i].exibirDados();
+        System.out.println("Digite o novo salario:");
+        double novoSalario = scanner.nextDouble();
 
-            //Resto do codigo para remover o funcionario
-            if(funcionarios[i].nome.equals(nomeRemover)) {
-                System.out.println("Funcionario removido: " + nomeRemover);
-                funcionarios[i] = null;
+          for(int i = 0; i <funcionarios.length; i++) {
+            if(funcionarios[i] != null && funcionarios[i].nome.equals(nomeAtualizar)){
+               funcionarios[i].salario = novoSalario;
             }
+          }
+        break;
+
+        case 4:
+        System.out.println("Digite o nome:");
+        String nomeRemover = scanner.nextLine();
+        for(int i = 0; i<funcionarios.length; i++) {
+            if(funcionarios[i] != null && funcionarios[i].nome.equals(nomeRemover)) {
+        System.out.println("Funcionario removido: " + nomeRemover);
+        funcionarios[i] = null;
+          }
+        }
+        break;
+
+         case 0: 
+         System.out.println("Encerrando o programa: ");
+         break;
         }
     }
     }
+}
